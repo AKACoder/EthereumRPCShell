@@ -1,7 +1,7 @@
 package utils
 
 import (
-	"EthereumRPCShell/common/constants"
+	"github.com/AKACoder/EthereumRPCShell/common/constants"
 	"strconv"
 )
 

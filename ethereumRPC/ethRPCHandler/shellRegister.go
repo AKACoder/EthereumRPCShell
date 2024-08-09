@@ -1,7 +1,7 @@
 package ethRPCHandler
 
 import (
-	"EthereumRPCShell/ethereumRPC/ethRPCHandler/ethRPCExecShells"
+	"github.com/AKACoder/EthereumRPCShell/ethereumRPC/ethRPCHandler/ethRPCExecShells"
 )
 
 var rpcShells = make(map[string]*ethRPCExecShells.EthRPCExecShell)

@@ -1,11 +1,11 @@
 package ethRPCShellConfig
 
 import (
-	"EthereumRPCShell/common/wLog"
-	"EthereumRPCShell/network/http"
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"github.com/AKACoder/EthereumRPCShell/common/wLog"
+	"github.com/AKACoder/EthereumRPCShell/network/http"
 	"os"
 )
 

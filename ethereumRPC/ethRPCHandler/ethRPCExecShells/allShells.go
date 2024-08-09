@@ -1,6 +1,8 @@
 package ethRPCExecShells
 
-import . "EthereumRPCShell/common/constants"
+import (
+	. "github.com/AKACoder/EthereumRPCShell/common/constants"
+)
 
 var AllShells = []*EthRPCExecShell{
 	//unsupported method

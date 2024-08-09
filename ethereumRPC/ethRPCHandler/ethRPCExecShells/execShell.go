@@ -1,8 +1,8 @@
 package ethRPCExecShells
 
 import (
-	. "EthereumRPCShell/ethereumClientProvider"
-	. "EthereumRPCShell/ethereumRPC/ethRPCHandler/ethRPCDataTypes"
+	. "github.com/AKACoder/EthereumRPCShell/ethereumClientProvider"
+	. "github.com/AKACoder/EthereumRPCShell/ethereumRPC/ethRPCHandler/ethRPCDataTypes"
 )
 
 type rpcClientExecuteFunc func(param []any) (any, *EthClientError)

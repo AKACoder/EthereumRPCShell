@@ -1,7 +1,7 @@
 package ethereumRPC
 
 import (
-	"EthereumRPCShell/ethereumRPC/ethRPCHandler"
+	"github.com/AKACoder/EthereumRPCShell/ethereumRPC/ethRPCHandler"
 	"github.com/gin-gonic/gin"
 )
 

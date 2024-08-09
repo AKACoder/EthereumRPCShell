@@ -1,7 +1,7 @@
 package http
 
 import (
-	"EthereumRPCShell/common/wLog"
+	"github.com/AKACoder/EthereumRPCShell/common/wLog"
 	"github.com/gin-gonic/gin"
 )
 

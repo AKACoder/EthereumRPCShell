@@ -1,8 +1,8 @@
 package ethRPCUtils
 
 import (
-	"EthereumRPCShell/common/wLog"
 	"encoding/json"
+	"github.com/AKACoder/EthereumRPCShell/common/wLog"
 	"github.com/gin-gonic/gin"
 	"strings"
 )

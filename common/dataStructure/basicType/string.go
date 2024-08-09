@@ -1,8 +1,8 @@
 package basicType
 
 import (
-	"EthereumRPCShell/common/wLog"
 	"encoding/hex"
+	"github.com/AKACoder/EthereumRPCShell/common/wLog"
 	"strings"
 )
 

@@ -1,8 +1,8 @@
 package ethRPCExecShells
 
 import (
-	. "EthereumRPCShell/common/constants"
-	. "EthereumRPCShell/ethereumClientProvider"
+	. "github.com/AKACoder/EthereumRPCShell/common/constants"
+	. "github.com/AKACoder/EthereumRPCShell/ethereumClientProvider"
 )
 
 var ETHGetUncleCountByBlockHash = &EthRPCExecShell{

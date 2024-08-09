@@ -1,6 +1,6 @@
 package ethRPCExecShells
 
-import "EthereumRPCShell/ethereumClientProvider"
+import "github.com/AKACoder/EthereumRPCShell/ethereumClientProvider"
 
 var rpcClient ethereumClientProvider.IEthereumClient = nil
 

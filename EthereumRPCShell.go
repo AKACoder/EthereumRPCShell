@@ -1,20 +1,22 @@
 package EthereumRPCShell
 
 import (
-	"EthereumRPCShell/common/wLog"
-	. "EthereumRPCShell/ethRPCShellConfig"
-	. "EthereumRPCShell/ethereumClientProvider"
-	. "EthereumRPCShell/ethereumRPC"
-	"EthereumRPCShell/ethereumRPC/ethRPCHandler"
-	"EthereumRPCShell/ethereumRPC/ethRPCHandler/ethRPCExecShells"
-	"EthereumRPCShell/ethereumRPC/middleware"
-	"EthereumRPCShell/network/http"
+	"github.com/AKACoder/EthereumRPCShell/common/wLog"
+	. "github.com/AKACoder/EthereumRPCShell/ethRPCShellConfig"
+	. "github.com/AKACoder/EthereumRPCShell/ethereumClientProvider"
+	. "github.com/AKACoder/EthereumRPCShell/ethereumRPC"
+	"github.com/AKACoder/EthereumRPCShell/ethereumRPC/ethRPCHandler"
+	"github.com/AKACoder/EthereumRPCShell/ethereumRPC/ethRPCHandler/ethRPCExecShells"
+	"github.com/AKACoder/EthereumRPCShell/ethereumRPC/middleware"
+	"github.com/AKACoder/EthereumRPCShell/network/http"
+	"github.com/AKACoder/EthereumRPCShell/shellErrors"
 	"sync"
 )
 
 func StartRPCShell(client IEthereumClient, cfg Config) (*sync.WaitGroup, error) {
 	wLog.SetUpLogger(cfg.LOG)
 
+	shellErrors.Load()
 	ethRPCExecShells.RegisterRPCClient(client)
 	ethRPCHandler.LoadShells()
 

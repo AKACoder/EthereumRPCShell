@@ -1,9 +1,9 @@
 package ethRPCExecShells
 
 import (
-	. "EthereumRPCShell/common/constants"
-	. "EthereumRPCShell/ethereumClientProvider"
 	"encoding/json"
+	. "github.com/AKACoder/EthereumRPCShell/common/constants"
+	. "github.com/AKACoder/EthereumRPCShell/ethereumClientProvider"
 )
 
 var ETHSendTransaction = &EthRPCExecShell{

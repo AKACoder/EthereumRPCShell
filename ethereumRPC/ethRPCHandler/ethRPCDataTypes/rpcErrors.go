@@ -1,6 +1,6 @@
 package ethRPCDataTypes
 
-import . "EthereumRPCShell/ethereumClientProvider"
+import . "github.com/AKACoder/EthereumRPCShell/ethereumClientProvider"
 
 const RPCDefaultErrorId = "error"
 

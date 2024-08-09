@@ -1,4 +1,4 @@
-module EthereumRPCShell
+module github.com/AKACoder/EthereumRPCShell
 
 go 1.22
 

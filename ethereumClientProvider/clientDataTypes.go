@@ -1,9 +1,9 @@
 package ethereumClientProvider
 
 import (
-	"EthereumRPCShell/common/constants"
-	"EthereumRPCShell/shellErrors"
 	"encoding/hex"
+	"github.com/AKACoder/EthereumRPCShell/common/constants"
+	"github.com/AKACoder/EthereumRPCShell/shellErrors"
 )
 
 type HexString string

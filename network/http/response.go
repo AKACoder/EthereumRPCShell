@@ -18,7 +18,7 @@
 package http
 
 import (
-	"EthereumRPCShell/shellErrors"
+	"github.com/AKACoder/EthereumRPCShell/shellErrors"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )

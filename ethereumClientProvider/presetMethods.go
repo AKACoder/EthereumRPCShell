@@ -1,8 +1,6 @@
 package ethereumClientProvider
 
-import (
-	. "EthereumRPCShell/common/constants"
-)
+import . "github.com/AKACoder/EthereumRPCShell/common/constants"
 
 const (
 	unknownStr   = "unknown"

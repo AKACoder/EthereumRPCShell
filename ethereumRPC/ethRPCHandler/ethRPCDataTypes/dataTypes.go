@@ -1,8 +1,6 @@
 package ethRPCDataTypes
 
-import (
-	. "EthereumRPCShell/ethereumClientProvider"
-)
+import . "github.com/AKACoder/EthereumRPCShell/ethereumClientProvider"
 
 type EthRPCCommon struct {
 	ID      any    `json:"id"`

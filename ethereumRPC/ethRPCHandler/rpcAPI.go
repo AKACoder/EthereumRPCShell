@@ -1,9 +1,9 @@
 package ethRPCHandler
 
 import (
-	. "EthereumRPCShell/ethereumClientProvider"
-	. "EthereumRPCShell/ethereumRPC/ethRPCHandler/ethRPCDataTypes"
-	"EthereumRPCShell/ethereumRPC/ethRPCHandler/ethRPCUtils"
+	. "github.com/AKACoder/EthereumRPCShell/ethereumClientProvider"
+	. "github.com/AKACoder/EthereumRPCShell/ethereumRPC/ethRPCHandler/ethRPCDataTypes"
+	"github.com/AKACoder/EthereumRPCShell/ethereumRPC/ethRPCHandler/ethRPCUtils"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )

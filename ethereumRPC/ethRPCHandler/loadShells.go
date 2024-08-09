@@ -1,11 +1,9 @@
 package ethRPCHandler
 
-import (
-	. "EthereumRPCShell/ethereumRPC/ethRPCHandler/ethRPCExecShells"
-)
+import "github.com/AKACoder/EthereumRPCShell/ethereumRPC/ethRPCHandler/ethRPCExecShells"
 
 func LoadShells() {
-	for _, shell := range AllShells {
+	for _, shell := range ethRPCExecShells.AllShells {
 		RegisterRPCShell(shell)
 	}
 }

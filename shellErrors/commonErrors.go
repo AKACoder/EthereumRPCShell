@@ -1,6 +1,6 @@
 package shellErrors
 
-import "EthereumRPCShell/common/dataStructure/enum"
+import "github.com/AKACoder/EthereumRPCShell/common/dataStructure/enum"
 
 var CommonErrors = struct {
 	InvalidHexPrefix enum.ErrorElement `msg:"Invalid hex prefix"`

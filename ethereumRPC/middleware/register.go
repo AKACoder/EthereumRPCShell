@@ -1,9 +1,9 @@
 package middleware
 
 import (
-	"EthereumRPCShell/ethereumRPC/middleware/after"
-	"EthereumRPCShell/ethereumRPC/middleware/before"
-	"EthereumRPCShell/network/http"
+	"github.com/AKACoder/EthereumRPCShell/ethereumRPC/middleware/after"
+	"github.com/AKACoder/EthereumRPCShell/ethereumRPC/middleware/before"
+	"github.com/AKACoder/EthereumRPCShell/network/http"
 )
 
 func RegisterServiceMiddleWare() {
