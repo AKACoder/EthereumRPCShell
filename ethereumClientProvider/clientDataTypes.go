@@ -2,6 +2,8 @@ package ethereumClientProvider
 
 import (
 	"encoding/hex"
+	"errors"
+	"fmt"
 	"github.com/AKACoder/EthereumRPCShell/common/constants"
 	"github.com/AKACoder/EthereumRPCShell/shellErrors"
 )
@@ -115,6 +117,10 @@ func (e EthBlockNumString) ValidBlock() bool {
 type EthClientError struct {
 	Code    int    `json:"code"`
 	Message string `json:"message"`
+}
+
+func (e *EthClientError) Error() error {
+	return errors.New(fmt.Sprintf("code: %d, message: %s", e.Code, e.Message))
 }
 
 var ClientParseErr = &EthClientError{Code: -32700, Message: "Parse error"}
