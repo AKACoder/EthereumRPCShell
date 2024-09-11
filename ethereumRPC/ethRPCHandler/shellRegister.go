@@ -7,5 +7,5 @@ import (
 var rpcShells = make(map[string]*ethRPCExecShells.EthRPCExecShell)
 
 func RegisterRPCShell(shell *ethRPCExecShells.EthRPCExecShell) {
-	rpcShells[shell.Name] = shell
+	rpcShells[shell.Name()] = shell
 }

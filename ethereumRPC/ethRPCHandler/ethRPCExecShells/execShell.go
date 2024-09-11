@@ -5,17 +5,37 @@ import (
 	. "github.com/AKACoder/EthereumRPCShell/ethereumRPC/ethRPCHandler/ethRPCDataTypes"
 )
 
-type rpcClientExecuteFunc func(param []any) (any, *EthClientError)
+type RPCClientExecuteFunc func(param []any) (any, *EthClientError)
 
 type EthRPCExecShell struct {
-	Name      string
-	ParamsObj any
-
+	name        string
 	unsupported bool
 	minParamLen int
 	maxParamLen int
 	defRet      any
-	execFn      rpcClientExecuteFunc
+	execFn      RPCClientExecuteFunc
+}
+
+func NewEthRPCExecShell(
+	name string,
+	minParamLen int,
+	maxParamLen int,
+	defRet any,
+	execFun RPCClientExecuteFunc,
+) *EthRPCExecShell {
+
+	return &EthRPCExecShell{
+		name:        name,
+		unsupported: false,
+		minParamLen: minParamLen,
+		maxParamLen: maxParamLen,
+		defRet:      defRet,
+		execFn:      execFun,
+	}
+}
+
+func (e EthRPCExecShell) Name() string {
+	return e.name
 }
 
 func (e EthRPCExecShell) paramLenCheck(paramLen int) *EthClientError {
@@ -51,7 +71,7 @@ func (e EthRPCExecShell) Execute(req *EthRPCRequest) (*EthRPCResult, *EthRPCErro
 		}
 	}
 
-	if !rpcClient.SupportCheck(e.Name) {
+	if !rpcClient.SupportCheck(e.name) {
 		return nil, RPCError(req.ID, ClientMethodNotSupport)
 	}
 

@@ -7,7 +7,7 @@ import (
 )
 
 var Web3ClientVersion = &EthRPCExecShell{
-	Name:   Method_web3_clientVersion,
+	name:   Method_web3_clientVersion,
 	defRet: "unknown",
 	execFn: func([]any) (any, *EthClientError) {
 		return rpcClient.Web3ClientVersion()
@@ -15,7 +15,7 @@ var Web3ClientVersion = &EthRPCExecShell{
 }
 
 var NetVersion = &EthRPCExecShell{
-	Name:   Method_net_version,
+	name:   Method_net_version,
 	defRet: "unknown",
 	execFn: func([]any) (any, *EthClientError) {
 		return rpcClient.NetVersion()
@@ -23,7 +23,7 @@ var NetVersion = &EthRPCExecShell{
 }
 
 var ETHSyncing = &EthRPCExecShell{
-	Name:   Method_eth_syncing,
+	name:   Method_eth_syncing,
 	defRet: false,
 	execFn: func([]any) (any, *EthClientError) {
 		status, data, err := rpcClient.Syncing()
@@ -40,7 +40,7 @@ var ETHSyncing = &EthRPCExecShell{
 }
 
 var ETHGetStorageAt = &EthRPCExecShell{
-	Name:        Method_eth_getStorageAt,
+	name:        Method_eth_getStorageAt,
 	minParamLen: 3,
 	maxParamLen: 3,
 	defRet:      "0x0",
@@ -62,7 +62,7 @@ var ETHGetStorageAt = &EthRPCExecShell{
 }
 
 var ETHGetCode = &EthRPCExecShell{
-	Name:        Method_eth_getCode,
+	name:        Method_eth_getCode,
 	minParamLen: 2,
 	maxParamLen: 2,
 	defRet:      "0x",
@@ -83,7 +83,7 @@ var ETHGetCode = &EthRPCExecShell{
 }
 
 var ETHGetLogs = &EthRPCExecShell{
-	Name:        Method_eth_getLogs,
+	name:        Method_eth_getLogs,
 	minParamLen: 1,
 	maxParamLen: 1,
 	defRet:      []EthLog{},

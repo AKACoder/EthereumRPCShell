@@ -6,7 +6,7 @@ import (
 )
 
 var ETHCoinbase = &EthRPCExecShell{
-	Name:   Method_eth_coinbase,
+	name:   Method_eth_coinbase,
 	defRet: ETHAddressZero,
 	execFn: func([]any) (any, *EthClientError) {
 		return rpcClient.Coinbase()
@@ -14,14 +14,14 @@ var ETHCoinbase = &EthRPCExecShell{
 }
 
 var ETHChainId = &EthRPCExecShell{
-	Name: Method_eth_chainId,
+	name: Method_eth_chainId,
 	execFn: func([]any) (any, *EthClientError) {
 		return rpcClient.ChainId()
 	},
 }
 
 var ETHMining = &EthRPCExecShell{
-	Name:   Method_eth_mining,
+	name:   Method_eth_mining,
 	defRet: false,
 	execFn: func([]any) (any, *EthClientError) {
 		return rpcClient.Mining()
@@ -29,7 +29,7 @@ var ETHMining = &EthRPCExecShell{
 }
 
 var ETHHashRate = &EthRPCExecShell{
-	Name:   Method_eth_hashrate,
+	name:   Method_eth_hashrate,
 	defRet: "0",
 	execFn: func([]any) (any, *EthClientError) {
 		return rpcClient.HashRate()
@@ -37,7 +37,7 @@ var ETHHashRate = &EthRPCExecShell{
 }
 
 var ETHGasPrice = &EthRPCExecShell{
-	Name:   Method_eth_gasPrice,
+	name:   Method_eth_gasPrice,
 	defRet: "0",
 	execFn: func([]any) (any, *EthClientError) {
 		return rpcClient.GasPrice()
@@ -45,7 +45,7 @@ var ETHGasPrice = &EthRPCExecShell{
 }
 
 var ETHBlockNumber = &EthRPCExecShell{
-	Name:   Method_eth_blockNumber,
+	name:   Method_eth_blockNumber,
 	defRet: "0",
 	execFn: func([]any) (any, *EthClientError) {
 		return rpcClient.BlockNumber()

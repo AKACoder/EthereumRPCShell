@@ -6,7 +6,7 @@ import (
 )
 
 var ETHAccounts = &EthRPCExecShell{
-	Name:   Method_eth_accounts,
+	name:   Method_eth_accounts,
 	defRet: []HexAddress{},
 	execFn: func([]any) (any, *EthClientError) {
 		return rpcClient.Accounts()
@@ -14,7 +14,7 @@ var ETHAccounts = &EthRPCExecShell{
 }
 
 var ETHGetBalance = &EthRPCExecShell{
-	Name:        Method_eth_getBalance,
+	name:        Method_eth_getBalance,
 	minParamLen: 2,
 	maxParamLen: 2,
 	defRet:      "0x0",
@@ -35,7 +35,7 @@ var ETHGetBalance = &EthRPCExecShell{
 }
 
 var ETHGetTransactionCount = &EthRPCExecShell{
-	Name:        Method_eth_getTransactionCount,
+	name:        Method_eth_getTransactionCount,
 	minParamLen: 2,
 	maxParamLen: 2,
 	defRet:      "0x0",

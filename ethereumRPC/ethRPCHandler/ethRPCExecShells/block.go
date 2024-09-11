@@ -6,7 +6,7 @@ import (
 )
 
 var ETHGetUncleCountByBlockHash = &EthRPCExecShell{
-	Name:        Method_eth_getUncleCountByBlockHash,
+	name:        Method_eth_getUncleCountByBlockHash,
 	minParamLen: 1,
 	maxParamLen: 1,
 	defRet:      "0x0",
@@ -26,7 +26,7 @@ var ETHGetUncleCountByBlockHash = &EthRPCExecShell{
 }
 
 var ETHGetUncleCountByBlockNumber = &EthRPCExecShell{
-	Name:        Method_eth_getUncleCountByBlockNumber,
+	name:        Method_eth_getUncleCountByBlockNumber,
 	minParamLen: 1,
 	maxParamLen: 1,
 	defRet:      "0x0",
@@ -46,7 +46,7 @@ var ETHGetUncleCountByBlockNumber = &EthRPCExecShell{
 }
 
 var ETHGetBlockByHash = &EthRPCExecShell{
-	Name:        Method_eth_getBlockByHash,
+	name:        Method_eth_getBlockByHash,
 	minParamLen: 2,
 	maxParamLen: 2,
 	execFn: func(params []any) (any, *EthClientError) {
@@ -70,7 +70,7 @@ var ETHGetBlockByHash = &EthRPCExecShell{
 }
 
 var ETHGetBlockByNumber = &EthRPCExecShell{
-	Name:        Method_eth_getBlockByNumber,
+	name:        Method_eth_getBlockByNumber,
 	minParamLen: 2,
 	maxParamLen: 2,
 	execFn: func(params []any) (any, *EthClientError) {
@@ -94,7 +94,7 @@ var ETHGetBlockByNumber = &EthRPCExecShell{
 }
 
 var ETHGetBlockTransactionCountByHash = &EthRPCExecShell{
-	Name:        Method_eth_getBlockTransactionCountByHash,
+	name:        Method_eth_getBlockTransactionCountByHash,
 	minParamLen: 1,
 	maxParamLen: 1,
 	defRet:      "0x0",
@@ -114,7 +114,7 @@ var ETHGetBlockTransactionCountByHash = &EthRPCExecShell{
 }
 
 var ETHGetBlockTransactionCountByNumber = &EthRPCExecShell{
-	Name:        Method_eth_getBlockTransactionCountByNumber,
+	name:        Method_eth_getBlockTransactionCountByNumber,
 	minParamLen: 1,
 	maxParamLen: 1,
 	defRet:      "0x0",
@@ -134,7 +134,7 @@ var ETHGetBlockTransactionCountByNumber = &EthRPCExecShell{
 }
 
 var ETHGetUncleByBlockHashAndIndex = &EthRPCExecShell{
-	Name:        Method_eth_getUncleByBlockHashAndIndex,
+	name:        Method_eth_getUncleByBlockHashAndIndex,
 	minParamLen: 2,
 	maxParamLen: 2,
 	defRet:      "0x0",
@@ -155,7 +155,7 @@ var ETHGetUncleByBlockHashAndIndex = &EthRPCExecShell{
 }
 
 var ETHGetUncleByBlockNumberAndIndex = &EthRPCExecShell{
-	Name:        Method_eth_getUncleByBlockNumberAndIndex,
+	name:        Method_eth_getUncleByBlockNumberAndIndex,
 	minParamLen: 2,
 	maxParamLen: 2,
 	defRet:      "0x0",

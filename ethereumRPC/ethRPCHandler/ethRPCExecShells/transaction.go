@@ -7,7 +7,7 @@ import (
 )
 
 var ETHSendTransaction = &EthRPCExecShell{
-	Name:        Method_eth_sendTransaction,
+	name:        Method_eth_sendTransaction,
 	minParamLen: 1,
 	maxParamLen: 1,
 	execFn: func(params []any) (any, *EthClientError) {
@@ -24,7 +24,7 @@ var ETHSendTransaction = &EthRPCExecShell{
 }
 
 var ETHSendRawTransaction = &EthRPCExecShell{
-	Name:        Method_eth_sendRawTransaction,
+	name:        Method_eth_sendRawTransaction,
 	minParamLen: 1,
 	maxParamLen: 1,
 	execFn: func(params []any) (any, *EthClientError) {
@@ -63,7 +63,7 @@ func getETHCallParam(params []any) (*EthBasicTransaction, *EthBlockNumString, *E
 }
 
 var ETHCall = &EthRPCExecShell{
-	Name:        Method_eth_call,
+	name:        Method_eth_call,
 	minParamLen: 2,
 	maxParamLen: 2,
 	execFn: func(params []any) (any, *EthClientError) {
@@ -76,7 +76,7 @@ var ETHCall = &EthRPCExecShell{
 }
 
 var ETHEstimateGas = &EthRPCExecShell{
-	Name:        Method_eth_estimateGas,
+	name:        Method_eth_estimateGas,
 	minParamLen: 2,
 	maxParamLen: 2,
 	execFn: func(params []any) (any, *EthClientError) {
@@ -89,7 +89,7 @@ var ETHEstimateGas = &EthRPCExecShell{
 }
 
 var ETHGetTransactionByHash = &EthRPCExecShell{
-	Name:        Method_eth_getTransactionByHash,
+	name:        Method_eth_getTransactionByHash,
 	minParamLen: 1,
 	maxParamLen: 1,
 	execFn: func(params []any) (any, *EthClientError) {
@@ -107,7 +107,7 @@ var ETHGetTransactionByHash = &EthRPCExecShell{
 }
 
 var ETHGetTransactionByBlockHashAndIndex = &EthRPCExecShell{
-	Name:        Method_eth_getTransactionByBlockHashAndIndex,
+	name:        Method_eth_getTransactionByBlockHashAndIndex,
 	minParamLen: 2,
 	maxParamLen: 2,
 	execFn: func(params []any) (any, *EthClientError) {
@@ -131,7 +131,7 @@ var ETHGetTransactionByBlockHashAndIndex = &EthRPCExecShell{
 }
 
 var ETHGetTransactionByBlockNumberAndIndex = &EthRPCExecShell{
-	Name:        Method_eth_getTransactionByBlockNumberAndIndex,
+	name:        Method_eth_getTransactionByBlockNumberAndIndex,
 	minParamLen: 2,
 	maxParamLen: 2,
 	execFn: func(params []any) (any, *EthClientError) {
@@ -155,7 +155,7 @@ var ETHGetTransactionByBlockNumberAndIndex = &EthRPCExecShell{
 }
 
 var ETHGetTransactionReceipt = &EthRPCExecShell{
-	Name:        Method_eth_getTransactionReceipt,
+	name:        Method_eth_getTransactionReceipt,
 	minParamLen: 1,
 	maxParamLen: 1,
 	execFn: func(params []any) (any, *EthClientError) {
