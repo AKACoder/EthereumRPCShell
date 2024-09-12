@@ -1,4 +1,4 @@
-package ethereumClientProvider
+package ethereumRPCProvider
 
 import (
 	"encoding/hex"
@@ -114,18 +114,18 @@ func (e EthBlockNumString) ValidBlock() bool {
 	return validBlockString[e]
 }
 
-type EthClientError struct {
+type RPCProviderError struct {
 	Code    int    `json:"code"`
 	Message string `json:"message"`
 }
 
-func (e *EthClientError) Error() error {
+func (e *RPCProviderError) Error() error {
 	return errors.New(fmt.Sprintf("code: %d, message: %s", e.Code, e.Message))
 }
 
-var ClientParseErr = &EthClientError{Code: -32700, Message: "Parse error"}
-var ClientInvalidReq = &EthClientError{Code: -32600, Message: "Invalid request"}
-var ClientMethodNotFound = &EthClientError{Code: -32601, Message: "Method not found"}
-var ClientInvalidParams = &EthClientError{Code: -32602, Message: "Invalid params"}
-var ClientInternalErr = &EthClientError{Code: -32603, Message: "Internal error"}
-var ClientMethodNotSupport = &EthClientError{Code: -32004, Message: "Method not supported"}
+var ProviderParseErr = &RPCProviderError{Code: -32700, Message: "Parse error"}
+var ProviderInvalidReq = &RPCProviderError{Code: -32600, Message: "Invalid request"}
+var ProviderMethodNotFound = &RPCProviderError{Code: -32601, Message: "Method not found"}
+var ProviderInvalidParams = &RPCProviderError{Code: -32602, Message: "Invalid params"}
+var ProviderInternalErr = &RPCProviderError{Code: -32603, Message: "Internal error"}
+var ProviderMethodNotSupport = &RPCProviderError{Code: -32004, Message: "Method not supported"}

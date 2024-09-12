@@ -1,6 +1,6 @@
 package ethRPCDataTypes
 
-import . "github.com/AKACoder/EthereumRPCShell/ethereumClientProvider"
+import . "github.com/AKACoder/EthereumRPCShell/ethereumRPCProvider"
 
 type EthRPCCommon struct {
 	ID      any    `json:"id"`
@@ -14,7 +14,7 @@ type EthRPCResult struct {
 
 type EthRPCError struct {
 	EthRPCCommon
-	Error *EthClientError `json:"error"`
+	Error *RPCProviderError `json:"error"`
 }
 
 type EthRPCRequest struct {

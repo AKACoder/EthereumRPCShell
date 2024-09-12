@@ -1,9 +1,9 @@
 package ethRPCExecShells
 
-import "github.com/AKACoder/EthereumRPCShell/ethereumClientProvider"
+import "github.com/AKACoder/EthereumRPCShell/ethereumRPCProvider"
 
-var rpcClient ethereumClientProvider.IEthereumClient = nil
+var rpcProvider ethereumRPCProvider.IEthereumRPCProvider = nil
 
-func RegisterRPCClient(client ethereumClientProvider.IEthereumClient) {
-	rpcClient = client
+func RegisterProvider(provider ethereumRPCProvider.IEthereumRPCProvider) {
+	rpcProvider = provider
 }

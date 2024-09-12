@@ -1,4 +1,4 @@
-package ethereumClientProvider
+package ethereumRPCProvider
 
 type EthBasicTransaction struct {
 	From                 HexAddress `json:"from"`
@@ -88,44 +88,44 @@ type EthGetLogsParam struct {
 	BlockHash *Hash256           `json:"blockhash"`
 }
 
-// IEthereumClient
+// IEthereumRPCProvider
 // known unsupported rpc method:
 // web3_sha3, net_listening, net_peerCount, eth_protocolVersion,
 // eth_sign, eth_signTransaction,
 // eth_newFilter, eth_newBlockFilter, eth_newPendingTransactionFilter, eth_uninstallFilter,
 // eth_getFilterChanges, eth_getFilterLogs
-type IEthereumClient interface {
+type IEthereumRPCProvider interface {
 	SupportCheck(string) bool
-	Web3ClientVersion() (string, *EthClientError)
-	NetVersion() (string, *EthClientError)
-	ProtocolVersion() (string, *EthClientError)
-	Syncing() (bool, any, *EthClientError)
-	Coinbase() (HexAddress, *EthClientError)
-	ChainId() (HexInt, *EthClientError)
-	Mining() (bool, *EthClientError)
-	HashRate() (HexInt, *EthClientError)
-	GasPrice() (HexInt, *EthClientError)
-	Accounts() ([]HexAddress, *EthClientError)
-	BlockNumber() (HexInt, *EthClientError)
-	Balance(HexAddress, EthBlockNumString) (HexInt, *EthClientError)
-	StorageAt(HexAddress, HexInt, EthBlockNumString) (HexData, *EthClientError)
-	TransactionCount(HexAddress, EthBlockNumString) (HexInt, *EthClientError)
-	BlockTransactionCountByHash(Hash256) (HexInt, *EthClientError)
-	BlockTransactionCountByNumber(EthBlockNumString) (HexInt, *EthClientError)
-	UncleCountByBlockHash(Hash256) (HexInt, *EthClientError)
-	UncleCountByBlockNumber(EthBlockNumString) (HexInt, *EthClientError)
-	Code(HexAddress, EthBlockNumString) (HexData, *EthClientError)
-	SendTransaction(EthBasicTransaction) (HexData, *EthClientError)
-	SendRawTransaction(HexData) (HexData, *EthClientError)
-	Call(EthBasicTransaction, EthBlockNumString) (HexData, *EthClientError)
-	EstimateGas(EthBasicTransaction, EthBlockNumString) (HexInt, *EthClientError)
-	BlockByHash(Hash256, bool) (*EthBlock, *EthClientError)
-	BlockByNumber(EthBlockNumString, bool) (*EthBlock, *EthClientError)
-	TransactionByHash(Hash256) (*EthFullTransaction, *EthClientError)
-	TransactionByBlockHashAndIndex(Hash256, HexInt) (*EthFullTransaction, *EthClientError)
-	TransactionByBlockNumberAndIndex(EthBlockNumString, HexInt) (*EthFullTransaction, *EthClientError)
-	TransactionReceipt(Hash256) (*EthTransactionReceipt, *EthClientError)
-	UncleByBlockHashAndIndex(Hash256, HexInt) (*EthBlock, *EthClientError)
-	UncleByBlockNumberAndIndex(EthBlockNumString, HexInt) (*EthBlock, *EthClientError)
-	Logs(EthGetLogsParam) ([]EthLog, *EthClientError)
+	Web3ClientVersion() (string, *RPCProviderError)
+	NetVersion() (string, *RPCProviderError)
+	ProtocolVersion() (string, *RPCProviderError)
+	Syncing() (bool, any, *RPCProviderError)
+	Coinbase() (HexAddress, *RPCProviderError)
+	ChainId() (HexInt, *RPCProviderError)
+	Mining() (bool, *RPCProviderError)
+	HashRate() (HexInt, *RPCProviderError)
+	GasPrice() (HexInt, *RPCProviderError)
+	Accounts() ([]HexAddress, *RPCProviderError)
+	BlockNumber() (HexInt, *RPCProviderError)
+	Balance(HexAddress, EthBlockNumString) (HexInt, *RPCProviderError)
+	StorageAt(HexAddress, HexInt, EthBlockNumString) (HexData, *RPCProviderError)
+	TransactionCount(HexAddress, EthBlockNumString) (HexInt, *RPCProviderError)
+	BlockTransactionCountByHash(Hash256) (HexInt, *RPCProviderError)
+	BlockTransactionCountByNumber(EthBlockNumString) (HexInt, *RPCProviderError)
+	UncleCountByBlockHash(Hash256) (HexInt, *RPCProviderError)
+	UncleCountByBlockNumber(EthBlockNumString) (HexInt, *RPCProviderError)
+	Code(HexAddress, EthBlockNumString) (HexData, *RPCProviderError)
+	SendTransaction(EthBasicTransaction) (HexData, *RPCProviderError)
+	SendRawTransaction(HexData) (HexData, *RPCProviderError)
+	Call(EthBasicTransaction, EthBlockNumString) (HexData, *RPCProviderError)
+	EstimateGas(EthBasicTransaction, EthBlockNumString) (HexInt, *RPCProviderError)
+	BlockByHash(Hash256, bool) (*EthBlock, *RPCProviderError)
+	BlockByNumber(EthBlockNumString, bool) (*EthBlock, *RPCProviderError)
+	TransactionByHash(Hash256) (*EthFullTransaction, *RPCProviderError)
+	TransactionByBlockHashAndIndex(Hash256, HexInt) (*EthFullTransaction, *RPCProviderError)
+	TransactionByBlockNumberAndIndex(EthBlockNumString, HexInt) (*EthFullTransaction, *RPCProviderError)
+	TransactionReceipt(Hash256) (*EthTransactionReceipt, *RPCProviderError)
+	UncleByBlockHashAndIndex(Hash256, HexInt) (*EthBlock, *RPCProviderError)
+	UncleByBlockNumberAndIndex(EthBlockNumString, HexInt) (*EthBlock, *RPCProviderError)
+	Logs(EthGetLogsParam) ([]EthLog, *RPCProviderError)
 }

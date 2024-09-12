@@ -1,9 +1,9 @@
 package ethRPCHandler
 
 import (
-	. "github.com/AKACoder/EthereumRPCShell/ethereumClientProvider"
 	. "github.com/AKACoder/EthereumRPCShell/ethereumRPC/ethRPCHandler/ethRPCDataTypes"
 	"github.com/AKACoder/EthereumRPCShell/ethereumRPC/ethRPCHandler/ethRPCUtils"
+	. "github.com/AKACoder/EthereumRPCShell/ethereumRPCProvider"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
@@ -21,7 +21,7 @@ func (e *ethereumRPCHandler) Response(data any) {
 func (e *ethereumRPCHandler) Handle(ctx *gin.Context) {
 	defer func() {
 		if err := recover(); err != nil {
-			e.Response(RPCError(RPCDefaultErrorId, ClientInternalErr))
+			e.Response(NewRPCError(RPCDefaultErrorId, ProviderInternalErr))
 		}
 	}()
 
@@ -29,13 +29,13 @@ func (e *ethereumRPCHandler) Handle(ctx *gin.Context) {
 	req := &EthRPCRequest{}
 	ok := ethRPCUtils.GetReqData(ctx, req)
 	if !ok {
-		e.Response(RPCError(req.ID, ClientParseErr))
+		e.Response(NewRPCError(req.ID, ProviderParseErr))
 		return
 	}
 
 	shell := rpcShells[req.Method]
 	if shell == nil {
-		e.Response(RPCError(req.ID, ClientMethodNotFound))
+		e.Response(NewRPCError(req.ID, ProviderMethodNotFound))
 		return
 	}
 

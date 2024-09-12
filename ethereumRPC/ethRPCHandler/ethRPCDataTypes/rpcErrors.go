@@ -1,10 +1,10 @@
 package ethRPCDataTypes
 
-import . "github.com/AKACoder/EthereumRPCShell/ethereumClientProvider"
+import . "github.com/AKACoder/EthereumRPCShell/ethereumRPCProvider"
 
 const RPCDefaultErrorId = "error"
 
-func RPCError(id any, err *EthClientError) *EthRPCError {
+func NewRPCError(id any, err *RPCProviderError) *EthRPCError {
 	return &EthRPCError{
 		EthRPCCommon: EthRPCCommon{
 			ID:      id,

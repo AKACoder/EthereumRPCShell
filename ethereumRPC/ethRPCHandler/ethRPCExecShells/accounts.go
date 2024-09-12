@@ -2,14 +2,14 @@ package ethRPCExecShells
 
 import (
 	. "github.com/AKACoder/EthereumRPCShell/common/constants"
-	. "github.com/AKACoder/EthereumRPCShell/ethereumClientProvider"
+	. "github.com/AKACoder/EthereumRPCShell/ethereumRPCProvider"
 )
 
 var ETHAccounts = &EthRPCExecShell{
 	name:   Method_eth_accounts,
 	defRet: []HexAddress{},
-	execFn: func([]any) (any, *EthClientError) {
-		return rpcClient.Accounts()
+	execFn: func([]any) (any, *RPCProviderError) {
+		return rpcProvider.Accounts()
 	},
 }
 
@@ -18,19 +18,19 @@ var ETHGetBalance = &EthRPCExecShell{
 	minParamLen: 2,
 	maxParamLen: 2,
 	defRet:      "0x0",
-	execFn: func(params []any) (any, *EthClientError) {
+	execFn: func(params []any) (any, *RPCProviderError) {
 		var addr HexAddress
 		var blk EthBlockNumString
 
 		if !addr.FromAny(params[0]) || !blk.FromAny(params[1]) {
-			return nil, ClientInvalidParams
+			return nil, ProviderInvalidParams
 		}
 
 		if !addr.ValidAddr() || !blk.ValidBlock() {
-			return nil, ClientInvalidParams
+			return nil, ProviderInvalidParams
 		}
 
-		return rpcClient.Balance(addr, blk)
+		return rpcProvider.Balance(addr, blk)
 	},
 }
 
@@ -39,18 +39,18 @@ var ETHGetTransactionCount = &EthRPCExecShell{
 	minParamLen: 2,
 	maxParamLen: 2,
 	defRet:      "0x0",
-	execFn: func(params []any) (any, *EthClientError) {
+	execFn: func(params []any) (any, *RPCProviderError) {
 		var addr HexAddress
 		var blk EthBlockNumString
 
 		if !addr.FromAny(params[0]) || !blk.FromAny(params[1]) {
-			return nil, ClientInvalidParams
+			return nil, ProviderInvalidParams
 		}
 
 		if !addr.ValidAddr() || !blk.ValidBlock() {
-			return nil, ClientInvalidParams
+			return nil, ProviderInvalidParams
 		}
 
-		return rpcClient.TransactionCount(addr, blk)
+		return rpcProvider.TransactionCount(addr, blk)
 	},
 }
