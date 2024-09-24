@@ -1,6 +1,7 @@
 package ethRPCHandler
 
 import (
+	"github.com/AKACoder/EthereumRPCShell/common/rpcLog"
 	. "github.com/AKACoder/EthereumRPCShell/ethereumRPC/ethRPCHandler/ethRPCDataTypes"
 	"github.com/AKACoder/EthereumRPCShell/ethereumRPC/ethRPCHandler/ethRPCUtils"
 	. "github.com/AKACoder/EthereumRPCShell/ethereumRPCProvider"
@@ -29,6 +30,8 @@ func (e *ethereumRPCHandler) Handle(ctx *gin.Context) {
 
 	shell := rpcShells[req.Method]
 	if shell == nil {
+		rpcLog.Log.Warn("request unregistered method: ", req.Method)
+
 		res.JSON(NewRPCError(req.ID, ProviderMethodNotFound))
 		return
 	}
