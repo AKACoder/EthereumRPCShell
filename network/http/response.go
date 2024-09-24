@@ -57,6 +57,10 @@ func (c *Response) Success(data interface{}) {
 	c.ServiceResult(0, "", data)
 }
 
+func (c *Response) JSON(data interface{}) {
+	c.ctx.JSON(http.StatusOK, data)
+}
+
 func (c *Response) ServiceResult(code int64, msg string, data interface{}) {
 	sRet := ServiceResult{
 		Code:    code,

@@ -4,46 +4,40 @@ import (
 	. "github.com/AKACoder/EthereumRPCShell/ethereumRPC/ethRPCHandler/ethRPCDataTypes"
 	"github.com/AKACoder/EthereumRPCShell/ethereumRPC/ethRPCHandler/ethRPCUtils"
 	. "github.com/AKACoder/EthereumRPCShell/ethereumRPCProvider"
+	"github.com/AKACoder/EthereumRPCShell/network/http"
 	"github.com/gin-gonic/gin"
-	"net/http"
 )
 
-type ethereumRPCHandler struct {
-	ctx *gin.Context
-}
+type ethereumRPCHandler struct{}
 
 var rpcAPI ethereumRPCHandler
 
-func (e *ethereumRPCHandler) Response(data any) {
-	e.ctx.JSON(http.StatusOK, data)
-}
-
 func (e *ethereumRPCHandler) Handle(ctx *gin.Context) {
+	res := http.NewResponse(ctx)
 	defer func() {
 		if err := recover(); err != nil {
-			e.Response(NewRPCError(RPCDefaultErrorId, ProviderInternalErr))
+			res.JSON(NewRPCError(RPCDefaultErrorId, ProviderInternalErr))
 		}
 	}()
 
-	e.ctx = ctx
 	req := &EthRPCRequest{}
 	ok := ethRPCUtils.GetReqData(ctx, req)
 	if !ok {
-		e.Response(NewRPCError(req.ID, ProviderParseErr))
+		res.JSON(NewRPCError(req.ID, ProviderParseErr))
 		return
 	}
 
 	shell := rpcShells[req.Method]
 	if shell == nil {
-		e.Response(NewRPCError(req.ID, ProviderMethodNotFound))
+		res.JSON(NewRPCError(req.ID, ProviderMethodNotFound))
 		return
 	}
 
 	successData, errorData := shell.Execute(req)
 	if errorData != nil {
-		e.Response(errorData)
+		res.JSON(errorData)
 	} else {
-		e.Response(successData)
+		res.JSON(successData)
 	}
 }
 
