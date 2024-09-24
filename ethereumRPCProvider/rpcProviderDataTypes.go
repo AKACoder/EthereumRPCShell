@@ -66,6 +66,9 @@ func (h HexData) ValidData() bool {
 }
 
 func (h HexData) ToBytes() ([]byte, error) {
+	if len(h) == 0 {
+		return nil, nil
+	}
 	return hex.DecodeString(string(h[2:]))
 }
 
