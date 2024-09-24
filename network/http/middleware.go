@@ -1,7 +1,7 @@
 package http
 
 import (
-	"github.com/AKACoder/EthereumRPCShell/common/wLog"
+	"github.com/AKACoder/EthereumRPCShell/common/rpcLog"
 	"github.com/gin-gonic/gin"
 )
 
@@ -23,7 +23,7 @@ func RegisterMiddleware(before []gin.HandlerFunc, after []AfterHandler) {
 func callAfterMiddleware(finalResult *ServiceResult, res *Response) (ret bool) {
 	defer func() {
 		if e := recover(); e != nil {
-			wLog.Log.Errorln("got an error @ after middleware: ", e)
+			rpcLog.Log.Errorln("got an error @ after middleware: ", e)
 			ret = false
 		}
 	}()

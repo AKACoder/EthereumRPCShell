@@ -2,7 +2,7 @@ package ethRPCUtils
 
 import (
 	"encoding/json"
-	"github.com/AKACoder/EthereumRPCShell/common/wLog"
+	"github.com/AKACoder/EthereumRPCShell/common/rpcLog"
 	"github.com/gin-gonic/gin"
 	"strings"
 )
@@ -10,13 +10,13 @@ import (
 func reqFromJSON(c *gin.Context, reqData interface{}) bool {
 	commReq, err := c.GetRawData()
 	if err != nil {
-		wLog.Log.Error("get common in request failed: ", err.Error())
+		rpcLog.Log.Error("get common in request failed: ", err.Error())
 		return false
 	}
 
 	err = json.Unmarshal(commReq, reqData)
 	if err != nil {
-		wLog.Log.Warn("reqFromJSON unmarshal data failed: ", err.Error())
+		rpcLog.Log.Warn("reqFromJSON unmarshal data failed: ", err.Error())
 		return false
 	}
 

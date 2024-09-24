@@ -19,8 +19,10 @@ package http
 
 import (
 	"errors"
-	"github.com/AKACoder/EthereumRPCShell/common/wLog"
+	"github.com/AKACoder/EthereumRPCShell/common/rpcLog"
 	"github.com/gin-gonic/gin"
+	"io"
+	"os"
 	"sync"
 )
 
@@ -37,6 +39,11 @@ func (s *Server) Start(wg *sync.WaitGroup) (*sync.WaitGroup, error) {
 
 	router := gin.Default()
 
+	f, err := os.Create(s.Config.LogFile)
+	if err == nil {
+		gin.DefaultWriter = io.MultiWriter(f)
+	}
+
 	//using before middlewares
 	router.Use(middlewares.before...)
 
@@ -49,14 +56,14 @@ func (s *Server) Start(wg *sync.WaitGroup) (*sync.WaitGroup, error) {
 	go func() {
 		defer func() {
 			if e := recover(); e != nil {
-				wLog.Log.Error(e)
+				rpcLog.Log.Error(e)
 			}
 			wg.Done()
 		}()
 
 		err = router.Run(s.Config.Address)
 		if err != nil {
-			wLog.Log.Warn("start http server failed: ", err.Error())
+			rpcLog.Log.Warn("start http server failed: ", err.Error())
 		}
 	}()
 

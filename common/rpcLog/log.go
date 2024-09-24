@@ -15,7 +15,7 @@
  *
  */
 
-package wLog
+package rpcLog
 
 import (
 	"fmt"
@@ -33,8 +33,8 @@ type scLog struct {
 }
 
 type Config struct {
-	Level   logrus.Level
-	LogFile string
+	Level   logrus.Level `json:"level"`
+	LogFile string       `json:"log_file"`
 }
 
 var Log *scLog
@@ -47,7 +47,7 @@ func SetUpLogger(cfg Config) {
 	if err == nil {
 		Log.Out = io.MultiWriter(os.Stdout, file)
 	} else {
-		Log.Info("Failed to wLog to file, using default stderr")
+		Log.Info("Failed to rpcLog to file, using default stderr")
 	}
 
 	Log.Formatter = &logrus.TextFormatter{
@@ -57,7 +57,7 @@ func SetUpLogger(cfg Config) {
 		TimestampFormat:  time.StampMilli,
 	}
 
-	// Only wLog the warning severity or above.
+	// Only rpcLog the warning severity or above.
 	Log.SetLevel(cfg.Level)
 }
 

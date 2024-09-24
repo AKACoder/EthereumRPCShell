@@ -24,4 +24,6 @@ type RouteRegister func(router gin.IRouter)
 type Config struct {
 	Address        string          `json:"address"`
 	RouteRegisters []RouteRegister `json:"-"`
+
+	LogFile string `json:"log_file"`
 }

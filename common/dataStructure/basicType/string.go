@@ -2,7 +2,7 @@ package basicType
 
 import (
 	"encoding/hex"
-	"github.com/AKACoder/EthereumRPCShell/common/wLog"
+	"github.com/AKACoder/EthereumRPCShell/common/rpcLog"
 	"strings"
 )
 
@@ -48,7 +48,7 @@ func ValidHex(hexStr string, byteLen int, allowBlank bool) bool {
 
 	bytes, err := hex.DecodeString(hexStr[2:])
 	if err != nil {
-		wLog.Log.Warn("decode hex failed:", err)
+		rpcLog.Log.Warn("decode hex failed:", err)
 		return false
 	}
 
