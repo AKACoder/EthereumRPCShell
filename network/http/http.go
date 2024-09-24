@@ -37,12 +37,13 @@ func (s *Server) Start(wg *sync.WaitGroup) (*sync.WaitGroup, error) {
 		return nil, err
 	}
 
-	router := gin.Default()
-
 	f, err := os.Create(s.Config.LogFile)
 	if err == nil {
 		gin.DefaultWriter = io.MultiWriter(f)
+		gin.DefaultErrorWriter = io.MultiWriter(f)
 	}
+
+	router := gin.Default()
 
 	//using before middlewares
 	router.Use(middlewares.before...)
