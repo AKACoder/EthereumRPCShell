@@ -1,15 +1,15 @@
 package ethereumRPCProvider
 
 type EthBasicTransaction struct {
-	From                 HexAddress `json:"from"`
-	To                   HexAddress `json:"to"`
-	Input                HexData    `json:"input"`
-	Gas                  HexInt     `json:"gas"`
-	GasPrice             HexInt     `json:"gasPrice"`
-	MaxPriorityFeePerGas *HexInt    `json:"maxPriorityFeePerGas"`
-	MaxFeePerGas         *HexInt    `json:"maxFeePerGas"`
-	Value                HexInt     `json:"value"`
-	Nonce                HexInt     `json:"nonce"`
+	From                 HexAddress  `json:"from"`
+	To                   *HexAddress `json:"to"`
+	Input                HexData     `json:"input"`
+	Gas                  HexInt      `json:"gas"`
+	GasPrice             HexInt      `json:"gasPrice"`
+	MaxPriorityFeePerGas *HexInt     `json:"maxPriorityFeePerGas"`
+	MaxFeePerGas         *HexInt     `json:"maxFeePerGas"`
+	Value                HexInt      `json:"value"`
+	Nonce                HexInt      `json:"nonce"`
 }
 
 type EthBlock struct {
