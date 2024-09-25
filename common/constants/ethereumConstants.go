@@ -4,6 +4,7 @@ const (
 	EVMAddressLength = 20
 	EVMHash256Length = 32
 	ETHAddressZero   = "0x0000000000000000000000000000000000000000"
+	DefaultBlock     = "latest"
 )
 
 var ETHRPCNamesMap = map[string]bool{

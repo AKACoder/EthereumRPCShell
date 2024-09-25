@@ -42,15 +42,6 @@ var ETHSendRawTransaction = &EthRPCExecShell{
 }
 
 func getETHCallParam(params []any) (*EthBasicTransaction, *EthBlockNumString, *RPCProviderError) {
-	var blk EthBlockNumString
-	if !blk.FromAny(params[1]) {
-		return nil, nil, ProviderInvalidParams
-	}
-
-	if !blk.ValidBlock() {
-		return nil, nil, ProviderInvalidParams
-	}
-
 	txJSON, _ := json.Marshal(params[0])
 	tx := &EthBasicTransaction{}
 	err := json.Unmarshal(txJSON, tx)
@@ -59,12 +50,25 @@ func getETHCallParam(params []any) (*EthBasicTransaction, *EthBlockNumString, *R
 		return nil, nil, ProviderInvalidParams
 	}
 
+	var blk EthBlockNumString = DefaultBlock
+	if len(params) == 1 {
+		return tx, &blk, nil
+	}
+
+	if !blk.FromAny(params[1]) {
+		return nil, nil, ProviderInvalidParams
+	}
+
+	if !blk.ValidBlock() {
+		return nil, nil, ProviderInvalidParams
+	}
+
 	return tx, &blk, nil
 }
 
 var ETHCall = &EthRPCExecShell{
 	name:        Method_eth_call,
-	minParamLen: 2,
+	minParamLen: 1,
 	maxParamLen: 2,
 	execFn: func(params []any) (any, *RPCProviderError) {
 		tx, blk, err := getETHCallParam(params)
@@ -77,7 +81,7 @@ var ETHCall = &EthRPCExecShell{
 
 var ETHEstimateGas = &EthRPCExecShell{
 	name:        Method_eth_estimateGas,
-	minParamLen: 2,
+	minParamLen: 1,
 	maxParamLen: 2,
 	execFn: func(params []any) (any, *RPCProviderError) {
 		tx, blk, err := getETHCallParam(params)
