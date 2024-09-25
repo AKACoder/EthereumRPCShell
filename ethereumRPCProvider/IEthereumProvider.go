@@ -47,7 +47,7 @@ type EthFullTransaction struct {
 	ChainId     *HexInt  `json:"chainId"`
 
 	EthBasicTransaction
-	Hash             Hash256 `json:"hash"`
+	Hash             Hash256 `json:"transactionHash"`
 	TransactionIndex HexInt  `json:"transactionIndex"`
 	YParity          HexInt  `json:"yParity"`
 	V                HexData `json:"v"`
