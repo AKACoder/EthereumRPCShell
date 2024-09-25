@@ -4,6 +4,7 @@ type EthBasicTransaction struct {
 	From                 HexAddress  `json:"from"`
 	To                   *HexAddress `json:"to"`
 	Input                HexData     `json:"input"`
+	Data                 HexData     `json:"data"`
 	Gas                  HexInt      `json:"gas"`
 	GasPrice             HexInt      `json:"gasPrice"`
 	MaxPriorityFeePerGas *HexInt     `json:"maxPriorityFeePerGas"`
