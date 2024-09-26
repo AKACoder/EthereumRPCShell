@@ -29,6 +29,15 @@ func (b BigInt) String() string {
 	return b.i.Text(constants.DecimalBase)
 }
 
+func (b BigInt) Int() *big.Int {
+	ret := big.NewInt(0).Set(b.i)
+	return ret
+}
+
+func (b BigInt) Uint64() uint64 {
+	return b.i.Uint64()
+}
+
 func (b *BigInt) MarshalText() ([]byte, error) {
 	return []byte("0x" + b.i.Text(constants.HexBase)), nil
 }
