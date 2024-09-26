@@ -11,7 +11,7 @@ const (
 type IMustImplementMethods interface {
 	SupportCheck(name string) bool
 	ChainId() (*types.BigInt, *RPCProviderError)
-	BlockNumber() (uint64, *RPCProviderError)
+	BlockNumber() (types.Uint64, *RPCProviderError)
 	Balance(types.Address, EthBlockNumString) (*types.BigInt, *RPCProviderError)
 	SendRawTransaction(types.Data) (types.Hash, *RPCProviderError)
 	Call(EthBasicTransaction, EthBlockNumString) (types.Hash, *RPCProviderError)
@@ -64,23 +64,23 @@ func (e *ETHRPCPresetMethods) StorageAt(types.Address, types.Key, EthBlockNumStr
 	return types.Data{}, ProviderMethodNotSupport
 }
 
-func (e *ETHRPCPresetMethods) TransactionCount(types.Address, EthBlockNumString) (uint64, *RPCProviderError) {
+func (e *ETHRPCPresetMethods) TransactionCount(types.Address, EthBlockNumString) (types.Uint64, *RPCProviderError) {
 	return 0, nil
 }
 
-func (e *ETHRPCPresetMethods) BlockTransactionCountByHash(types.Hash) (uint64, *RPCProviderError) {
+func (e *ETHRPCPresetMethods) BlockTransactionCountByHash(types.Hash) (types.Uint64, *RPCProviderError) {
 	return 0, nil
 }
 
-func (e *ETHRPCPresetMethods) BlockTransactionCountByNumber(EthBlockNumString) (uint64, *RPCProviderError) {
+func (e *ETHRPCPresetMethods) BlockTransactionCountByNumber(EthBlockNumString) (types.Uint64, *RPCProviderError) {
 	return 0, nil
 }
 
-func (e *ETHRPCPresetMethods) UncleCountByBlockHash(types.Hash) (uint64, *RPCProviderError) {
+func (e *ETHRPCPresetMethods) UncleCountByBlockHash(types.Hash) (types.Uint64, *RPCProviderError) {
 	return 0, nil
 }
 
-func (e *ETHRPCPresetMethods) UncleCountByBlockNumber(EthBlockNumString) (uint64, *RPCProviderError) {
+func (e *ETHRPCPresetMethods) UncleCountByBlockNumber(EthBlockNumString) (types.Uint64, *RPCProviderError) {
 	return 0, nil
 }
 
@@ -92,7 +92,7 @@ func (e *ETHRPCPresetMethods) SendTransaction(EthBasicTransaction) (types.Hash, 
 	return types.Hash{}, ProviderMethodNotSupport
 }
 
-func (e *ETHRPCPresetMethods) EstimateGas(EthBasicTransaction, EthBlockNumString) (uint64, *RPCProviderError) {
+func (e *ETHRPCPresetMethods) EstimateGas(EthBasicTransaction, EthBlockNumString) (types.Uint64, *RPCProviderError) {
 	return 0, nil
 }
 

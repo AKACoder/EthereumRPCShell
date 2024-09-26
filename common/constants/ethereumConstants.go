@@ -7,6 +7,7 @@ const (
 	EVMHashHexLength    = 66
 	EVMIntLength        = 32
 	EVMIntHexLength     = 32
+	EVMUint64Length     = 8
 	DefaultBlock        = "latest"
 )
 

@@ -5,101 +5,101 @@ import (
 )
 
 type EthBasicTransaction struct {
-	Type                 HexInt      `json:"type"`
-	Nonce                HexInt      `json:"nonce"`
-	From                 HexAddress  `json:"from"`
-	To                   *HexAddress `json:"to"`
-	AccessList           []any       `json:"accessList"`
-	Input                HexData     `json:"input"`
-	Data                 HexData     `json:"data"`
-	Gas                  HexInt      `json:"gas"`
-	GasPrice             HexInt      `json:"gasPrice"`
-	MaxPriorityFeePerGas *HexInt     `json:"maxPriorityFeePerGas"`
-	MaxFeePerGas         *HexInt     `json:"maxFeePerGas"`
-	Value                HexInt      `json:"value"`
+	Type                 types.Uint64   `json:"type"`
+	Nonce                types.Uint64   `json:"nonce"`
+	From                 types.Address  `json:"from"`
+	To                   *types.Address `json:"to"`
+	AccessList           []any          `json:"accessList"`
+	Input                types.Data     `json:"input"`
+	Data                 types.Data     `json:"data"`
+	Gas                  types.Uint64   `json:"gas"`
+	GasPrice             *types.BigInt  `json:"gasPrice"`
+	MaxPriorityFeePerGas *types.BigInt  `json:"maxPriorityFeePerGas"`
+	MaxFeePerGas         *types.BigInt  `json:"maxFeePerGas"`
+	Value                *types.BigInt  `json:"value"`
 }
 
 type EthBlock struct {
-	Number                *HexInt     `json:"number"`
-	Hash                  *Hash256    `json:"hash"`
-	ParentHash            *Hash256    `json:"parentHash"`
-	Nonce                 *HexInt     `json:"nonce"`
-	Sha3Uncles            *Hash256    `json:"sha3Uncles"`
-	LogsBloom             *HexData    `json:"logsBloom"`
-	TransactionsRoot      *Hash256    `json:"transactionsRoot"`
-	StateRoot             *Hash256    `json:"stateRoot"`
-	ReceiptsRoot          *Hash256    `json:"receiptsRoot"`
-	Miner                 *HexAddress `json:"miner"`
-	Difficulty            *HexInt     `json:"difficulty"`
-	TotalDifficulty       *HexInt     `json:"totalDifficulty"`
-	ExtraData             *HexData    `json:"extraData"`
-	MixHash               *HexData    `json:"mixHash"`
-	Size                  *HexInt     `json:"size"`
-	GasLimit              *HexInt     `json:"gasLimit"`
-	GasUsed               *HexInt     `json:"gasUsed"`
-	BaseFeePerGas         *HexInt     `json:"baseFeePerGas"`
-	Withdrawals           []any       `json:"withdrawals"`
-	WithdrawalsRoot       *HexInt     `json:"withdrawalsRoot"`
-	BlobGasUsed           *HexInt     `json:"blobGasUsed"`
-	ExcessBlobGas         *HexInt     `json:"excessBlobGas"`
-	ParentBeaconBlockRoot *HexInt     `json:"parentBeaconBlockRoot"`
-	Timestamp             *HexInt     `json:"timestamp"`
-	Transactions          []any       `json:"transactions"`
-	Uncles                []Hash256   `json:"uncles"`
+	Number                types.Uint64   `json:"number"`
+	Hash                  types.Hash     `json:"hash"`
+	ParentHash            types.Hash     `json:"parentHash"`
+	Nonce                 types.Data     `json:"nonce"`
+	Sha3Uncles            *types.Hash    `json:"sha3Uncles"`
+	LogsBloom             *types.Data    `json:"logsBloom"`
+	TransactionsRoot      types.Hash     `json:"transactionsRoot"`
+	StateRoot             types.Hash     `json:"stateRoot"`
+	ReceiptsRoot          types.Hash     `json:"receiptsRoot"`
+	Miner                 *types.Address `json:"miner"`
+	Difficulty            types.Data     `json:"difficulty"`
+	TotalDifficulty       types.Data     `json:"totalDifficulty"`
+	ExtraData             types.Data     `json:"extraData"`
+	MixHash               types.Data     `json:"mixHash"`
+	Size                  types.Uint64   `json:"size"`
+	GasLimit              types.Uint64   `json:"gasLimit"`
+	GasUsed               types.Uint64   `json:"gasUsed"`
+	BaseFeePerGas         *types.BigInt  `json:"baseFeePerGas"`
+	Withdrawals           []any          `json:"withdrawals"`
+	WithdrawalsRoot       *types.Hash    `json:"withdrawalsRoot"`
+	BlobGasUsed           types.Uint64   `json:"blobGasUsed"`
+	ExcessBlobGas         types.Uint64   `json:"excessBlobGas"`
+	ParentBeaconBlockRoot *types.Hash    `json:"parentBeaconBlockRoot"`
+	Timestamp             types.Uint64   `json:"timestamp"`
+	Transactions          []any          `json:"transactions"`
+	Uncles                []types.Hash   `json:"uncles"`
 }
 
 type EthFullTransaction struct {
-	BlockHash   *Hash256 `json:"blockHash"`
-	BlockNumber *HexInt  `json:"blockNumber"`
-	ChainId     *HexInt  `json:"chainId"`
+	BlockHash   types.Hash    `json:"blockHash"`
+	BlockNumber types.Uint64  `json:"blockNumber"`
+	ChainId     *types.BigInt `json:"chainId"`
 
 	EthBasicTransaction
-	Hash             Hash256 `json:"hash"`
-	TransactionIndex HexInt  `json:"transactionIndex"`
-	YParity          HexInt  `json:"yParity"`
-	V                HexData `json:"v"`
-	R                HexData `json:"r"`
-	S                HexData `json:"s"`
+	Hash             types.Hash   `json:"hash"`
+	TransactionIndex types.Uint64 `json:"transactionIndex"`
+	YParity          types.Uint64 `json:"yParity"`
+	V                types.Uint64 `json:"v"`
+	R                types.Data   `json:"r"`
+	S                types.Data   `json:"s"`
 }
 
 type EthLog struct {
-	Removed          bool        `json:"removed"`
-	LogIndex         *HexInt     `json:"logIndex"`
-	TransactionIndex *HexInt     `json:"transactionIndex"`
-	TransactionHash  *Hash256    `json:"transactionHash"`
-	BlockHash        *Hash256    `json:"blockHash"`
-	BlockNumber      *HexInt     `json:"blockNumber"`
-	Address          *HexAddress `json:"address"`
-	Data             HexData     `json:"data"`
-	Topics           []HexData   `json:"topics"`
+	Removed          bool          `json:"removed"`
+	LogIndex         types.Uint64  `json:"logIndex"`
+	TransactionIndex types.Uint64  `json:"transactionIndex"`
+	TransactionHash  types.Hash    `json:"transactionHash"`
+	BlockHash        types.Hash    `json:"blockHash"`
+	BlockNumber      types.Uint64  `json:"blockNumber"`
+	Address          types.Address `json:"address"`
+	Data             types.Data    `json:"data"`
+	Topics           []types.Data  `json:"topics"`
 }
 
 type EthTransactionReceipt struct {
-	BlockHash         *Hash256    `json:"blockHash"`
-	BlockNumber       *HexInt     `json:"blockNumber"`
-	ChainId           *HexInt     `json:"chainId"`
-	Type              HexInt      `json:"type"`
-	TxHash            Hash256     `json:"transactionHash"`
-	TxIndex           Hash256     `json:"transactionIndex"`
-	From              HexAddress  `json:"from"`
-	To                *HexAddress `json:"to"`
-	ContractAddress   HexAddress  `json:"contractAddress"`
-	Logs              []EthLog    `json:"logs"`
-	LogsBloom         HexData     `json:"logsBloom"`
-	Root              HexData     `json:"root"`
-	GasUsed           HexInt      `json:"gasUsed"`
-	CumulativeGasUsed HexInt      `json:"cumulativeGasUsed"`
-	EffectiveGasPrice HexInt      `json:"effectiveGasPrice"`
-	BlobGasPrice      HexInt      `json:"blobGasPrice"`
-	Status            HexInt      `json:"status"`
+	Root              *types.Hash    `json:"root,omitempty"`
+	BlockHash         types.Hash     `json:"blockHash"`
+	BlockNumber       types.Uint64   `json:"blockNumber"`
+	ChainId           *types.BigInt  `json:"chainId"`
+	Type              types.Uint64   `json:"type"`
+	TxHash            types.Hash     `json:"transactionHash"`
+	TxIndex           types.Uint64   `json:"transactionIndex"`
+	From              types.Address  `json:"from"`
+	To                *types.Address `json:"to"`
+	ContractAddress   *types.Address `json:"contractAddress"`
+	Logs              []EthLog       `json:"logs"`
+	LogsBloom         types.Data     `json:"logsBloom"`
+	GasUsed           types.Uint64   `json:"gasUsed"`
+	CumulativeGasUsed types.Uint64   `json:"cumulativeGasUsed"`
+	EffectiveGasPrice *types.BigInt  `json:"effectiveGasPrice"`
+	BlobGasPrice      *types.BigInt  `json:"blobGasPrice"`
+	Status            types.Uint64   `json:"status"`
 }
 
 type EthGetLogsParam struct {
 	FromBlock *EthBlockNumString `json:"fromBlock"`
 	ToBlock   *EthBlockNumString `json:"toBlock"`
 	Address   any                `json:"address"`
-	Topics    []Hash256          `json:"topics"`
-	BlockHash *Hash256           `json:"blockhash"`
+	Topics    []types.Hash       `json:"topics"`
+	BlockHash *types.Hash        `json:"blockhash"`
 }
 
 // IEthereumRPCProvider
@@ -120,19 +120,19 @@ type IEthereumRPCProvider interface {
 	HashRate() (*types.BigInt, *RPCProviderError)
 	GasPrice() (*types.BigInt, *RPCProviderError)
 	Accounts() ([]types.Address, *RPCProviderError)
-	BlockNumber() (uint64, *RPCProviderError)
+	BlockNumber() (types.Uint64, *RPCProviderError)
 	Balance(addr types.Address, blk EthBlockNumString) (*types.BigInt, *RPCProviderError)
 	StorageAt(addr types.Address, key types.Key, blk EthBlockNumString) (types.Data, *RPCProviderError)
-	TransactionCount(addr types.Address, blk EthBlockNumString) (uint64, *RPCProviderError)
-	BlockTransactionCountByHash(hash types.Hash) (uint64, *RPCProviderError)
-	BlockTransactionCountByNumber(blk EthBlockNumString) (uint64, *RPCProviderError)
-	UncleCountByBlockHash(blkHash types.Hash) (uint64, *RPCProviderError)
-	UncleCountByBlockNumber(blk EthBlockNumString) (uint64, *RPCProviderError)
+	TransactionCount(addr types.Address, blk EthBlockNumString) (types.Uint64, *RPCProviderError)
+	BlockTransactionCountByHash(hash types.Hash) (types.Uint64, *RPCProviderError)
+	BlockTransactionCountByNumber(blk EthBlockNumString) (types.Uint64, *RPCProviderError)
+	UncleCountByBlockHash(blkHash types.Hash) (types.Uint64, *RPCProviderError)
+	UncleCountByBlockNumber(blk EthBlockNumString) (types.Uint64, *RPCProviderError)
 	Code(addr types.Address, blk EthBlockNumString) (types.Data, *RPCProviderError)
 	SendTransaction(tx EthBasicTransaction) (types.Hash, *RPCProviderError)
 	SendRawTransaction(data types.Data) (types.Hash, *RPCProviderError)
 	Call(tx EthBasicTransaction, blk EthBlockNumString) (types.Data, *RPCProviderError)
-	EstimateGas(tx EthBasicTransaction, blk EthBlockNumString) (uint64, *RPCProviderError)
+	EstimateGas(tx EthBasicTransaction, blk EthBlockNumString) (types.Uint64, *RPCProviderError)
 	BlockByHash(blkHash types.Hash, fullTx bool) (*EthBlock, *RPCProviderError)
 	BlockByNumber(blk EthBlockNumString, fullTx bool) (*EthBlock, *RPCProviderError)
 	TransactionByHash(txHash types.Hash) (*EthFullTransaction, *RPCProviderError)
