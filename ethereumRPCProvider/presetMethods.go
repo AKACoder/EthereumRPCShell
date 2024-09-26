@@ -1,24 +1,24 @@
 package ethereumRPCProvider
 
-import . "github.com/AKACoder/EthereumRPCShell/common/constants"
+import (
+	"github.com/AKACoder/EthereumRPCShell/common/dataStructure/types"
+)
 
 const (
-	unknownStr   = "unknown"
-	zeroStr      = "0x00"
-	emptyDataStr = "0x"
+	unknownStr = "unknown"
 )
 
 type IMustImplementMethods interface {
 	SupportCheck(name string) bool
-	ChainId() (HexInt, *RPCProviderError)
-	BlockNumber() (HexInt, *RPCProviderError)
-	Balance(HexAddress, EthBlockNumString) (HexInt, *RPCProviderError)
-	SendRawTransaction(HexData) (HexData, *RPCProviderError)
-	Call(EthBasicTransaction, EthBlockNumString) (HexData, *RPCProviderError)
-	BlockByHash(Hash256, bool) (*EthBlock, *RPCProviderError)
+	ChainId() (*types.BigInt, *RPCProviderError)
+	BlockNumber() (uint64, *RPCProviderError)
+	Balance(types.Address, EthBlockNumString) (*types.BigInt, *RPCProviderError)
+	SendRawTransaction(types.Data) (types.Hash, *RPCProviderError)
+	Call(EthBasicTransaction, EthBlockNumString) (types.Hash, *RPCProviderError)
+	BlockByHash(types.Hash, bool) (*EthBlock, *RPCProviderError)
 	BlockByNumber(EthBlockNumString, bool) (*EthBlock, *RPCProviderError)
-	TransactionByHash(Hash256) (*EthFullTransaction, *RPCProviderError)
-	TransactionReceipt(Hash256) (*EthTransactionReceipt, *RPCProviderError)
+	TransactionByHash(types.Hash) (*EthFullTransaction, *RPCProviderError)
+	TransactionReceipt(types.Hash) (*EthTransactionReceipt, *RPCProviderError)
 	Logs(EthGetLogsParam) ([]EthLog, *RPCProviderError)
 }
 
@@ -40,74 +40,74 @@ func (e *ETHRPCPresetMethods) Syncing() (bool, any, *RPCProviderError) {
 	return false, nil, nil
 }
 
-func (e *ETHRPCPresetMethods) Coinbase() (HexAddress, *RPCProviderError) {
-	return ETHAddressZero, nil
+func (e *ETHRPCPresetMethods) Coinbase() (types.Address, *RPCProviderError) {
+	return types.Address{}, nil
 }
 
 func (e *ETHRPCPresetMethods) Mining() (bool, *RPCProviderError) {
 	return false, nil
 }
 
-func (e *ETHRPCPresetMethods) HashRate() (HexInt, *RPCProviderError) {
-	return zeroStr, nil
+func (e *ETHRPCPresetMethods) HashRate() (*types.BigInt, *RPCProviderError) {
+	return types.NewBigInt(), nil
 }
 
-func (e *ETHRPCPresetMethods) GasPrice() (HexInt, *RPCProviderError) {
-	return zeroStr, nil
+func (e *ETHRPCPresetMethods) GasPrice() (*types.BigInt, *RPCProviderError) {
+	return types.NewBigInt(), nil
 }
 
-func (e *ETHRPCPresetMethods) Accounts() ([]HexAddress, *RPCProviderError) {
-	return []HexAddress{}, nil
+func (e *ETHRPCPresetMethods) Accounts() ([]types.Address, *RPCProviderError) {
+	return []types.Address{}, nil
 }
 
-func (e *ETHRPCPresetMethods) StorageAt(HexAddress, HexInt, EthBlockNumString) (HexData, *RPCProviderError) {
-	return emptyDataStr, ProviderMethodNotSupport
+func (e *ETHRPCPresetMethods) StorageAt(types.Address, types.Key, EthBlockNumString) (types.Data, *RPCProviderError) {
+	return types.Data{}, ProviderMethodNotSupport
 }
 
-func (e *ETHRPCPresetMethods) TransactionCount(HexAddress, EthBlockNumString) (HexInt, *RPCProviderError) {
-	return zeroStr, nil
+func (e *ETHRPCPresetMethods) TransactionCount(types.Address, EthBlockNumString) (uint64, *RPCProviderError) {
+	return 0, nil
 }
 
-func (e *ETHRPCPresetMethods) BlockTransactionCountByHash(Hash256) (HexInt, *RPCProviderError) {
-	return zeroStr, nil
+func (e *ETHRPCPresetMethods) BlockTransactionCountByHash(types.Hash) (uint64, *RPCProviderError) {
+	return 0, nil
 }
 
-func (e *ETHRPCPresetMethods) BlockTransactionCountByNumber(EthBlockNumString) (HexInt, *RPCProviderError) {
-	return zeroStr, nil
+func (e *ETHRPCPresetMethods) BlockTransactionCountByNumber(EthBlockNumString) (uint64, *RPCProviderError) {
+	return 0, nil
 }
 
-func (e *ETHRPCPresetMethods) UncleCountByBlockHash(Hash256) (HexInt, *RPCProviderError) {
-	return zeroStr, nil
+func (e *ETHRPCPresetMethods) UncleCountByBlockHash(types.Hash) (uint64, *RPCProviderError) {
+	return 0, nil
 }
 
-func (e *ETHRPCPresetMethods) UncleCountByBlockNumber(EthBlockNumString) (HexInt, *RPCProviderError) {
-	return zeroStr, nil
+func (e *ETHRPCPresetMethods) UncleCountByBlockNumber(EthBlockNumString) (uint64, *RPCProviderError) {
+	return 0, nil
 }
 
-func (e *ETHRPCPresetMethods) Code(HexAddress, EthBlockNumString) (HexData, *RPCProviderError) {
-	return emptyDataStr, ProviderMethodNotSupport
+func (e *ETHRPCPresetMethods) Code(types.Address, EthBlockNumString) (types.Data, *RPCProviderError) {
+	return types.Data{}, ProviderMethodNotSupport
 }
 
-func (e *ETHRPCPresetMethods) SendTransaction(EthBasicTransaction) (HexData, *RPCProviderError) {
-	return emptyDataStr, ProviderMethodNotSupport
+func (e *ETHRPCPresetMethods) SendTransaction(EthBasicTransaction) (types.Hash, *RPCProviderError) {
+	return types.Hash{}, ProviderMethodNotSupport
 }
 
-func (e *ETHRPCPresetMethods) EstimateGas(EthBasicTransaction, EthBlockNumString) (HexInt, *RPCProviderError) {
-	return zeroStr, nil
+func (e *ETHRPCPresetMethods) EstimateGas(EthBasicTransaction, EthBlockNumString) (uint64, *RPCProviderError) {
+	return 0, nil
 }
 
-func (e *ETHRPCPresetMethods) TransactionByBlockHashAndIndex(Hash256, HexInt) (*EthFullTransaction, *RPCProviderError) {
+func (e *ETHRPCPresetMethods) TransactionByBlockHashAndIndex(types.Hash, uint64) (*EthFullTransaction, *RPCProviderError) {
 	return nil, ProviderMethodNotSupport
 }
 
-func (e *ETHRPCPresetMethods) TransactionByBlockNumberAndIndex(EthBlockNumString, HexInt) (*EthFullTransaction, *RPCProviderError) {
+func (e *ETHRPCPresetMethods) TransactionByBlockNumberAndIndex(EthBlockNumString, uint64) (*EthFullTransaction, *RPCProviderError) {
 	return nil, ProviderMethodNotSupport
 }
 
-func (e *ETHRPCPresetMethods) UncleByBlockHashAndIndex(Hash256, HexInt) (*EthBlock, *RPCProviderError) {
+func (e *ETHRPCPresetMethods) UncleByBlockHashAndIndex(types.Hash, uint64) (*EthBlock, *RPCProviderError) {
 	return nil, nil
 }
 
-func (e *ETHRPCPresetMethods) UncleByBlockNumberAndIndex(EthBlockNumString, HexInt) (*EthBlock, *RPCProviderError) {
+func (e *ETHRPCPresetMethods) UncleByBlockNumberAndIndex(EthBlockNumString, uint64) (*EthBlock, *RPCProviderError) {
 	return nil, nil
 }

@@ -19,18 +19,12 @@ var ETHGetBalance = &EthRPCExecShell{
 	maxParamLen: 2,
 	defRet:      "0x0",
 	execFn: func(params []any) (any, *RPCProviderError) {
-		var addr HexAddress
-		var blk EthBlockNumString
-
-		if !addr.FromAny(params[0]) || !blk.FromAny(params[1]) {
+		addr, blk, err := extractAddressAndBlock(params[0], params[1])
+		if err != nil {
 			return nil, ProviderInvalidParams
 		}
 
-		if !addr.ValidAddr() || !blk.ValidBlock() {
-			return nil, ProviderInvalidParams
-		}
-
-		return rpcProvider.Balance(addr, blk)
+		return rpcProvider.Balance(*addr, *blk)
 	},
 }
 
@@ -40,17 +34,10 @@ var ETHGetTransactionCount = &EthRPCExecShell{
 	maxParamLen: 2,
 	defRet:      "0x0",
 	execFn: func(params []any) (any, *RPCProviderError) {
-		var addr HexAddress
-		var blk EthBlockNumString
-
-		if !addr.FromAny(params[0]) || !blk.FromAny(params[1]) {
+		addr, blk, err := extractAddressAndBlock(params[0], params[1])
+		if err != nil {
 			return nil, ProviderInvalidParams
 		}
-
-		if !addr.ValidAddr() || !blk.ValidBlock() {
-			return nil, ProviderInvalidParams
-		}
-
-		return rpcProvider.TransactionCount(addr, blk)
+		return rpcProvider.TransactionCount(*addr, *blk)
 	},
 }

@@ -3,6 +3,7 @@ package ethRPCExecShells
 import (
 	"encoding/json"
 	. "github.com/AKACoder/EthereumRPCShell/common/constants"
+	"github.com/AKACoder/EthereumRPCShell/common/dataStructure/types"
 	. "github.com/AKACoder/EthereumRPCShell/ethereumRPCProvider"
 )
 
@@ -28,12 +29,9 @@ var ETHSendRawTransaction = &EthRPCExecShell{
 	minParamLen: 1,
 	maxParamLen: 1,
 	execFn: func(params []any) (any, *RPCProviderError) {
-		var txData HexData
-		if !txData.FromAny(params[0]) {
-			return nil, ProviderInvalidParams
-		}
-
-		if !txData.ValidData() {
+		var txData types.Data
+		err := txData.FromParam(params[0])
+		if err != nil {
 			return nil, ProviderInvalidParams
 		}
 
@@ -97,16 +95,12 @@ var ETHGetTransactionByHash = &EthRPCExecShell{
 	minParamLen: 1,
 	maxParamLen: 1,
 	execFn: func(params []any) (any, *RPCProviderError) {
-		var txHash Hash256
-		if !txHash.FromAny(params[0]) {
+		txHash, err := extractHash(params[0])
+		if err != nil {
 			return nil, ProviderInvalidParams
 		}
 
-		if !txHash.ValidHash() {
-			return nil, ProviderInvalidParams
-		}
-
-		return rpcProvider.TransactionByHash(txHash)
+		return rpcProvider.TransactionByHash(*txHash)
 	},
 }
 
@@ -115,22 +109,12 @@ var ETHGetTransactionByBlockHashAndIndex = &EthRPCExecShell{
 	minParamLen: 2,
 	maxParamLen: 2,
 	execFn: func(params []any) (any, *RPCProviderError) {
-		var blkHash Hash256
-		var idx HexInt
-
-		if !blkHash.FromAny(params[0]) || idx.FromAny(params[1]) {
+		blkHash, idx, err := extractHashAndInt(params[0], params[1])
+		if err != nil {
 			return nil, ProviderInvalidParams
 		}
 
-		if !blkHash.ValidHash() {
-			return nil, ProviderInvalidParams
-		}
-
-		if !idx.ValidInt() {
-			return nil, ProviderInvalidParams
-		}
-
-		return rpcProvider.TransactionByBlockHashAndIndex(blkHash, idx)
+		return rpcProvider.TransactionByBlockHashAndIndex(*blkHash, idx)
 	},
 }
 
@@ -139,22 +123,13 @@ var ETHGetTransactionByBlockNumberAndIndex = &EthRPCExecShell{
 	minParamLen: 2,
 	maxParamLen: 2,
 	execFn: func(params []any) (any, *RPCProviderError) {
-		var blk EthBlockNumString
-		var idx HexInt
+		blk, idx, err := extractBlkNumAndInt(params[0], params[1])
 
-		if !blk.FromAny(params[0]) || idx.FromAny(params[1]) {
+		if err != nil {
 			return nil, ProviderInvalidParams
 		}
 
-		if !blk.ValidBlock() {
-			return nil, ProviderInvalidParams
-		}
-
-		if !idx.ValidInt() {
-			return nil, ProviderInvalidParams
-		}
-
-		return rpcProvider.TransactionByBlockNumberAndIndex(blk, idx)
+		return rpcProvider.TransactionByBlockNumberAndIndex(*blk, idx)
 	},
 }
 
@@ -163,16 +138,12 @@ var ETHGetTransactionReceipt = &EthRPCExecShell{
 	minParamLen: 1,
 	maxParamLen: 1,
 	execFn: func(params []any) (any, *RPCProviderError) {
-		var txHash Hash256
+		txHash, err := extractHash(params[0])
 
-		if !txHash.FromAny(params[0]) {
+		if err != nil {
 			return nil, ProviderInvalidParams
 		}
 
-		if !txHash.ValidHash() {
-			return nil, ProviderInvalidParams
-		}
-
-		return rpcProvider.TransactionReceipt(txHash)
+		return rpcProvider.TransactionReceipt(*txHash)
 	},
 }

@@ -2,12 +2,13 @@ package ethRPCExecShells
 
 import (
 	. "github.com/AKACoder/EthereumRPCShell/common/constants"
+	"github.com/AKACoder/EthereumRPCShell/common/dataStructure/types"
 	. "github.com/AKACoder/EthereumRPCShell/ethereumRPCProvider"
 )
 
 var ETHCoinbase = &EthRPCExecShell{
 	name:   Method_eth_coinbase,
-	defRet: ETHAddressZero,
+	defRet: types.Address{},
 	execFn: func([]any) (any, *RPCProviderError) {
 		return rpcProvider.Coinbase()
 	},

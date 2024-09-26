@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/AKACoder/EthereumRPCShell/common/constants"
+	"github.com/AKACoder/EthereumRPCShell/common/utils"
 	"github.com/AKACoder/EthereumRPCShell/shellErrors"
 )
 
@@ -56,7 +57,7 @@ func (h HexAddress) ValidAddr() bool {
 type Hash256 = HexString
 
 func (h Hash256) ValidHash() bool {
-	return h.Valid(constants.EVMHash256Length) == nil
+	return h.Valid(constants.EVMHashLength) == nil
 }
 
 type HexData = HexString
@@ -97,8 +98,26 @@ func (e *EthBlockNumString) FromAny(v any) bool {
 		return false
 	}
 
-	*e = EthBlockNumString(vStr)
+	blkStr := EthBlockNumString(vStr)
+	if !blkStr.ValidBlock() {
+		return false
+	}
+
+	*e = blkStr
 	return true
+}
+
+func (e EthBlockNumString) Uint64(defBlk uint64) uint64 {
+	blk, err := utils.HexParamToUint64(string(e))
+	if err == nil {
+		return blk
+	}
+
+	if string(e) == "earliest" {
+		return 0
+	}
+
+	return defBlk
 }
 
 func (e EthBlockNumString) ValidBlock() bool {

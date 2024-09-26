@@ -2,6 +2,7 @@ package ethRPCExecShells
 
 import (
 	. "github.com/AKACoder/EthereumRPCShell/common/constants"
+	"github.com/AKACoder/EthereumRPCShell/common/utils"
 	. "github.com/AKACoder/EthereumRPCShell/ethereumRPCProvider"
 )
 
@@ -11,17 +12,12 @@ var ETHGetUncleCountByBlockHash = &EthRPCExecShell{
 	maxParamLen: 1,
 	defRet:      "0x0",
 	execFn: func(params []any) (any, *RPCProviderError) {
-		hash, hashOk := params[0].(Hash256)
-
-		if !hashOk {
+		txHash, err := extractHash(params[0])
+		if err != nil {
 			return nil, ProviderInvalidParams
 		}
 
-		if !hash.ValidHash() {
-			return nil, ProviderInvalidParams
-		}
-
-		return rpcProvider.UncleCountByBlockHash(hash)
+		return rpcProvider.UncleCountByBlockHash(*txHash)
 	},
 }
 
@@ -37,10 +33,6 @@ var ETHGetUncleCountByBlockNumber = &EthRPCExecShell{
 			return nil, ProviderInvalidParams
 		}
 
-		if !blk.ValidBlock() {
-			return nil, ProviderInvalidParams
-		}
-
 		return rpcProvider.UncleCountByBlockNumber(blk)
 	},
 }
@@ -50,13 +42,8 @@ var ETHGetBlockByHash = &EthRPCExecShell{
 	minParamLen: 2,
 	maxParamLen: 2,
 	execFn: func(params []any) (any, *RPCProviderError) {
-		var blkHash Hash256
-
-		if !blkHash.FromAny(params[0]) {
-			return nil, ProviderInvalidParams
-		}
-
-		if !blkHash.ValidHash() {
+		blkHash, err := extractHash(params[0])
+		if err != nil {
 			return nil, ProviderInvalidParams
 		}
 
@@ -65,7 +52,7 @@ var ETHGetBlockByHash = &EthRPCExecShell{
 			return nil, ProviderInvalidParams
 		}
 
-		return rpcProvider.BlockByHash(blkHash, txFlag)
+		return rpcProvider.BlockByHash(*blkHash, txFlag)
 	},
 }
 
@@ -77,10 +64,6 @@ var ETHGetBlockByNumber = &EthRPCExecShell{
 		var blk EthBlockNumString
 
 		if !blk.FromAny(params[0]) {
-			return nil, ProviderInvalidParams
-		}
-
-		if !blk.ValidBlock() {
 			return nil, ProviderInvalidParams
 		}
 
@@ -99,17 +82,12 @@ var ETHGetBlockTransactionCountByHash = &EthRPCExecShell{
 	maxParamLen: 1,
 	defRet:      "0x0",
 	execFn: func(params []any) (any, *RPCProviderError) {
-		var hash Hash256
-
-		if !hash.FromAny(params[0]) {
+		blkHash, err := extractHash(params[0])
+		if err != nil {
 			return nil, ProviderInvalidParams
 		}
 
-		if !hash.ValidHash() {
-			return nil, ProviderInvalidParams
-		}
-
-		return rpcProvider.BlockTransactionCountByHash(hash)
+		return rpcProvider.BlockTransactionCountByHash(*blkHash)
 	},
 }
 
@@ -125,10 +103,6 @@ var ETHGetBlockTransactionCountByNumber = &EthRPCExecShell{
 			return nil, ProviderInvalidParams
 		}
 
-		if !blk.ValidBlock() {
-			return nil, ProviderInvalidParams
-		}
-
 		return rpcProvider.BlockTransactionCountByNumber(blk)
 	},
 }
@@ -139,18 +113,17 @@ var ETHGetUncleByBlockHashAndIndex = &EthRPCExecShell{
 	maxParamLen: 2,
 	defRet:      "0x0",
 	execFn: func(params []any) (any, *RPCProviderError) {
-		var blkHash Hash256
-		var idx HexInt
-
-		if !blkHash.FromAny(params[0]) || !idx.FromAny(params[1]) {
+		blkHash, err := extractHash(params[0])
+		if err != nil {
 			return nil, ProviderInvalidParams
 		}
 
-		if !blkHash.ValidHash() || !idx.ValidInt() {
+		idx, err := utils.HexParamToUint64(params[1])
+		if err != nil {
 			return nil, ProviderInvalidParams
 		}
 
-		return rpcProvider.UncleByBlockHashAndIndex(blkHash, idx)
+		return rpcProvider.UncleByBlockHashAndIndex(*blkHash, idx)
 	},
 }
 
@@ -161,13 +134,12 @@ var ETHGetUncleByBlockNumberAndIndex = &EthRPCExecShell{
 	defRet:      "0x0",
 	execFn: func(params []any) (any, *RPCProviderError) {
 		var blk EthBlockNumString
-		var idx HexInt
-
-		if !blk.FromAny(params[0]) || !idx.FromAny(params[1]) {
+		if !blk.FromAny(params[0]) {
 			return nil, ProviderInvalidParams
 		}
 
-		if !blk.ValidBlock() || !idx.ValidInt() {
+		idx, err := utils.HexParamToUint64(params[1])
+		if err != nil {
 			return nil, ProviderInvalidParams
 		}
 

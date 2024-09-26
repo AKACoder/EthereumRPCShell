@@ -3,6 +3,7 @@ package ethRPCExecShells
 import (
 	"encoding/json"
 	. "github.com/AKACoder/EthereumRPCShell/common/constants"
+	"github.com/AKACoder/EthereumRPCShell/common/dataStructure/types"
 	. "github.com/AKACoder/EthereumRPCShell/ethereumRPCProvider"
 )
 
@@ -45,15 +46,20 @@ var ETHGetStorageAt = &EthRPCExecShell{
 	maxParamLen: 3,
 	defRet:      "0x0",
 	execFn: func(params []any) (any, *RPCProviderError) {
-		var addr HexAddress
-		var pos HexInt
-		var blk EthBlockNumString
-
-		if !addr.FromAny(params[0]) || !pos.FromAny(params[1]) || !blk.FromAny(params[2]) {
+		var addr types.Address
+		err := addr.FromParam(params[0])
+		if err != nil {
 			return nil, ProviderInvalidParams
 		}
 
-		if !addr.ValidAddr() || !pos.ValidInt() || !blk.ValidBlock() {
+		var pos types.Key
+		err = pos.FromParam(params[1])
+		if err != nil {
+			return nil, ProviderInvalidParams
+		}
+
+		var blk EthBlockNumString
+		if !blk.FromAny(params[2]) {
 			return nil, ProviderInvalidParams
 		}
 
@@ -67,18 +73,12 @@ var ETHGetCode = &EthRPCExecShell{
 	maxParamLen: 2,
 	defRet:      "0x",
 	execFn: func(params []any) (any, *RPCProviderError) {
-		var addr HexAddress
-		var blk EthBlockNumString
-
-		if !addr.FromAny(params[0]) || !blk.FromAny(params[1]) {
+		addr, blk, err := extractAddressAndBlock(params[0], params[1])
+		if err != nil {
 			return nil, ProviderInvalidParams
 		}
 
-		if !addr.ValidAddr() || !blk.ValidBlock() {
-			return nil, ProviderInvalidParams
-		}
-
-		return rpcProvider.Code(addr, blk)
+		return rpcProvider.Code(*addr, *blk)
 	},
 }
 
