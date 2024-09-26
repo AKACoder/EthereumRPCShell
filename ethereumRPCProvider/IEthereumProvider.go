@@ -1,8 +1,11 @@
 package ethereumRPCProvider
 
 type EthBasicTransaction struct {
+	Type                 HexInt      `json:"type"`
+	Nonce                HexInt      `json:"nonce"`
 	From                 HexAddress  `json:"from"`
 	To                   *HexAddress `json:"to"`
+	AccessList           []any       `json:"accessList"`
 	Input                HexData     `json:"input"`
 	Data                 HexData     `json:"data"`
 	Gas                  HexInt      `json:"gas"`
@@ -10,7 +13,6 @@ type EthBasicTransaction struct {
 	MaxPriorityFeePerGas *HexInt     `json:"maxPriorityFeePerGas"`
 	MaxFeePerGas         *HexInt     `json:"maxFeePerGas"`
 	Value                HexInt      `json:"value"`
-	Nonce                HexInt      `json:"nonce"`
 }
 
 type EthBlock struct {
@@ -48,7 +50,7 @@ type EthFullTransaction struct {
 	ChainId     *HexInt  `json:"chainId"`
 
 	EthBasicTransaction
-	Hash             Hash256 `json:"transactionHash"`
+	Hash             Hash256 `json:"hash"`
 	TransactionIndex HexInt  `json:"transactionIndex"`
 	YParity          HexInt  `json:"yParity"`
 	V                HexData `json:"v"`
@@ -69,16 +71,23 @@ type EthLog struct {
 }
 
 type EthTransactionReceipt struct {
-	EthFullTransaction
-	CumulativeGasUsed HexInt     `json:"cumulativeGasUsed"`
-	EffectiveGasPrice HexInt     `json:"effectiveGasPrice"`
-	GasUsed           HexInt     `json:"gasUsed"`
-	ContractAddress   HexAddress `json:"contractAddress"`
-	Logs              []EthLog   `json:"logs"`
-	LogsBloom         HexData    `json:"logsBloom"`
-	Type              HexInt     `json:"type"`
-	Root              HexData    `json:"root"`
-	Status            HexInt     `json:"status"`
+	BlockHash         *Hash256    `json:"blockHash"`
+	BlockNumber       *HexInt     `json:"blockNumber"`
+	ChainId           *HexInt     `json:"chainId"`
+	Type              HexInt      `json:"type"`
+	TxHash            Hash256     `json:"transactionHash"`
+	TxIndex           Hash256     `json:"transactionIndex"`
+	From              HexAddress  `json:"from"`
+	To                *HexAddress `json:"to"`
+	ContractAddress   HexAddress  `json:"contractAddress"`
+	Logs              []EthLog    `json:"logs"`
+	LogsBloom         HexData     `json:"logsBloom"`
+	Root              HexData     `json:"root"`
+	GasUsed           HexInt      `json:"gasUsed"`
+	CumulativeGasUsed HexInt      `json:"cumulativeGasUsed"`
+	EffectiveGasPrice HexInt      `json:"effectiveGasPrice"`
+	BlobGasPrice      HexInt      `json:"blobGasPrice"`
+	Status            HexInt      `json:"status"`
 }
 
 type EthGetLogsParam struct {
