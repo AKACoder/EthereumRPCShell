@@ -16,6 +16,15 @@ func NewBigInt() *BigInt {
 	}
 }
 
+func BigIntOf(i *big.Int) *BigInt {
+	ret := NewBigInt()
+	if i != nil {
+		ret.i.Set(i)
+	}
+
+	return ret
+}
+
 func (b BigInt) String() string {
 	return b.i.Text(constants.DecimalBase)
 }
