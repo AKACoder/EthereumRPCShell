@@ -6,7 +6,7 @@ import (
 
 type EthBasicTransaction struct {
 	Type                 types.Uint64   `json:"type"`
-	Nonce                types.Uint64   `json:"nonce"`
+	Nonce                types.BigInt   `json:"nonce"`
 	From                 types.Address  `json:"from"`
 	To                   *types.Address `json:"to"`
 	AccessList           []any          `json:"accessList"`
