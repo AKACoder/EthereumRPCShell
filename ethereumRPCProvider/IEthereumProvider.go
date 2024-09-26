@@ -30,8 +30,8 @@ type EthBlock struct {
 	StateRoot             types.Hash     `json:"stateRoot"`
 	ReceiptsRoot          types.Hash     `json:"receiptsRoot"`
 	Miner                 *types.Address `json:"miner"`
-	Difficulty            types.Data     `json:"difficulty"`
-	TotalDifficulty       types.Data     `json:"totalDifficulty"`
+	Difficulty            *types.BigInt  `json:"difficulty"`
+	TotalDifficulty       *types.BigInt  `json:"totalDifficulty"`
 	ExtraData             types.Data     `json:"extraData"`
 	MixHash               types.Data     `json:"mixHash"`
 	Size                  types.Uint64   `json:"size"`
