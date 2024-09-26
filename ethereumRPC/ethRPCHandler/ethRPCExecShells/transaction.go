@@ -57,10 +57,6 @@ func getETHCallParam(params []any) (*EthBasicTransaction, *EthBlockNumString, *R
 		return nil, nil, ProviderInvalidParams
 	}
 
-	if !blk.ValidBlock() {
-		return nil, nil, ProviderInvalidParams
-	}
-
 	return tx, &blk, nil
 }
 

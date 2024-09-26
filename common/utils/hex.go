@@ -2,7 +2,6 @@ package utils
 
 import (
 	"encoding/hex"
-	"fmt"
 	"github.com/AKACoder/EthereumRPCShell/common/shellErrors"
 	"strconv"
 )
@@ -51,7 +50,6 @@ func HexToBytes(val []byte, receiver *[]byte, allowOdd bool) error {
 func HexParamToUint64(val any) (uint64, error) {
 	hexStr, ok := val.(string)
 	if !ok {
-		fmt.Println("go error here?")
 		return 0, shellErrors.InvalidParameterType
 	}
 
