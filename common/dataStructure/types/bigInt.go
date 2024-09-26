@@ -58,13 +58,15 @@ func (b *BigInt) SetBytes(d []byte) *BigInt {
 }
 
 func (b *BigInt) UnmarshalText(val []byte) error {
+	bi := NewBigInt()
 	var data []byte
 	err := utils.HexToBytes(val, &data, true)
 	if err != nil {
 		return err
 	}
 
-	b.i.SetBytes(data)
+	bi.SetBytes(data)
 
+	*b = *bi
 	return nil
 }
