@@ -33,16 +33,19 @@ func (b *BigInt) MarshalText() ([]byte, error) {
 	return []byte("0x" + b.i.Text(constants.HexBase)), nil
 }
 
-func (b *BigInt) SetUint64(x uint64) {
+func (b *BigInt) SetUint64(x uint64) *BigInt {
 	b.i.SetUint64(x)
+	return b
 }
 
-func (b *BigInt) SetBytes(d []byte) {
+func (b *BigInt) SetBytes(d []byte) *BigInt {
 	if len(d) > constants.EVMIntLength {
 		d = d[len(d)-constants.EVMIntLength:]
 	}
 
 	b.i.SetBytes(d)
+
+	return b
 }
 
 func (b *BigInt) UnmarshalText(val []byte) error {
